@@ -1,10 +1,13 @@
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from typing import List
 from ..state import ResearchState
+from dotenv import load_dotenv
+import os
 
+load_dotenv(verbose=True)
 # Same LLM used across nodes for consistency
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = ChatOllama(model="llama3.1", temperature=0)
 
 synth_prompt = PromptTemplate(
     input_variables=["joined_notes", "query"],
@@ -30,6 +33,7 @@ def synthesize_results(state: ResearchState) -> ResearchState:
     """
     research_outputs: List[str] = state.get("research_output", [])
     query: str = state.get("query", "")
+    print("Synthesizing prompts...")
 
     if not research_outputs:
         # Minimal graceful fallback
@@ -47,5 +51,6 @@ def synthesize_results(state: ResearchState) -> ResearchState:
     chain = synth_prompt | llm
     result = chain.invoke({"joined_notes": joined, "query": query}).content
     state["final_answer"] = result.strip()
+    print(f"Synthesized {len(research_outputs)} prompts.\n")
     return state
 

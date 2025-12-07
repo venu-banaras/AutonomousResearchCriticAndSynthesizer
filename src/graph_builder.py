@@ -1,8 +1,8 @@
 from langgraph.graph import StateGraph, END
-from .state import ResearchState
-from .nodes.expand import expand_query
-from .nodes.research import research_subqueries
-from .nodes.synthesize import synthesize_results
+from src.state import ResearchState
+from src.nodes.expand import expand_query
+from src.nodes.research import research_subqueries
+from src.nodes.synthesize import synthesize_results
 
 def build_graph():
     # Initialize the state graph with our state type

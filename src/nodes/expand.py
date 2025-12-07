@@ -1,10 +1,14 @@
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from typing import List
 from ..state import ResearchState
+from dotenv import load_dotenv
+import os
+
+load_dotenv(verbose=True)
 
 # Simple LLM instance for now
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = ChatOllama(model="llama3.1", temperature=0)
 
 # Prompt template for splitting query
 
@@ -32,6 +36,7 @@ def expand_query(state: ResearchState) -> ResearchState:
     # Parse numbered list into python list
     lines = response.strip().splitlines()
     subqueries: List[str] = []
+    print("Expanding prompts into subqueries...")
 
     for line in lines:
         line = line.strip()
@@ -43,4 +48,5 @@ def expand_query(state: ResearchState) -> ResearchState:
             # Fallback: add non-numbered lines directly
             subqueries.append(line)
     state["subqueries"] = subqueries
+    print(f"Expanded prompts into subqueries: {subqueries}")
     return state

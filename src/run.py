@@ -1,6 +1,6 @@
 import argparse
-from graph_builder import build_graph
-from state import ResearchState
+from src.graph_builder import build_graph
+from src.state import ResearchState
 
 def main():
     parser = argparse.ArgumentParser(description="Run the Langgraph Research MVP")
