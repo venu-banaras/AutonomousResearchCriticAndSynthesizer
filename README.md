@@ -1,8 +1,9 @@
 Export path using:-
-$env:PYTHONPATH = "$PWD;$env:PYTHONPATH"
+
+# $env:PYTHONPATH = "$PWD;$env:PYTHONPATH"
 
 
-PHASE - 2
+## PHASE - 2
 
 `
 expand
@@ -19,3 +20,19 @@ critic
                          ↓
                       synthesize
 `
+
+
+
+### UPDATED GRAPH STRUCTURE:-
+
+expand
+   ↓
+research
+   ↓
+critic
+   ↓         ↘
+revise (loop) accept
+   ↓             ↓
+research      synthesize
+                 ↓
+                END

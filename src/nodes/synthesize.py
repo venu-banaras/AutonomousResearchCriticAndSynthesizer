@@ -50,7 +50,6 @@ def synthesize_results(state: ResearchState) -> ResearchState:
     joined = "\n\n".join(research_outputs)
     chain = synth_prompt | llm
     result = chain.invoke({"joined_notes": joined, "query": query}).content
-    state["final_answer"] = result.strip()
+    # state["final_answer"] = result.strip()
     print(f"Synthesized {len(research_outputs)} prompts.\n")
-    return state
-
+    return {"final_answer": result.strip()}

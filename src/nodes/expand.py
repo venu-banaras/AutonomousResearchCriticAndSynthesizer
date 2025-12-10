@@ -47,6 +47,6 @@ def expand_query(state: ResearchState) -> ResearchState:
         else:
             # Fallback: add non-numbered lines directly
             subqueries.append(line)
-    state["subqueries"] = subqueries
+    # state["subqueries"] = subqueries
     print(f"Expanded prompts into subqueries: {subqueries}")
-    return state
+    return {"subqueries": subqueries}

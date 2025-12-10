@@ -36,7 +36,7 @@ def research_subqueries(state: ResearchState) -> ResearchState:
 
         research_outputs.append(result.strip())
 
-    state["research_output"] = research_outputs
+    # state["research_output"] = research_outputs
     print(f"Generated {len(subqueries)} short research-style prompts.\n")
     print(f"Research output prompts: {research_outputs}")
-    return state
+    return {"research_output": research_outputs}
