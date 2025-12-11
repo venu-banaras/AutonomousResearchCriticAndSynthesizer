@@ -16,13 +16,6 @@ def main():
         "subqueries": [],
         "research_output": [],
         "final_answer": "",
-        "critic_results": [],
-        "needs_revision": False,
-        "fact_checks": [],
-        "needs_factfix": False,
-        "contradiction_report": {},
-        "needs_contradiction_fix": False,
-        "parallel_results": [],
     }
 
     # Run the graph

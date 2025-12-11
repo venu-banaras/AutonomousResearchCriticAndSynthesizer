@@ -16,7 +16,7 @@ expand_prompt = PromptTemplate(
     input_variables=["query"],
     template=(
         "You are a query decomposition assistant.\n"
-        "Break the following user query into and optimal number of specific sub-questions. The sub-questions should be such that they cover almost all aspects of the query.\n"
+        "Break the following user query into 2 or 3 specific sub-questions.\n"
         "Return ONLY a numbered list of the sub-questions.\n\n"
         "User query: {query}"
     ),

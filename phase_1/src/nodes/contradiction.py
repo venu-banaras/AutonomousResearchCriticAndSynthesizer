@@ -11,27 +11,26 @@ llm = ChatOllama(
 contradiction_prompt = PromptTemplate(
     input_variables=["outputs"],
     template=(
-        "You are a contradiction-detection assistant.\n"
-        "Analyze the combined research outputs below for conflicting claims.\n"
-        "Look for:\n"
-        "- opposite statements\n"
-        "- incompatible numbers or statistics\n"
-        "- conflicting predictions\n"
-        "- contradictory causal claims\n\n"
-        "Return STRICT JSON ONLY:\n"
-        "{{\n"
-        "  \"verdict\": \"conflict\" or \"no_conflict\",\n"
-        "  \"conflicting_pairs\": [\"summary1 vs summary2\", ...],\n"
-        "  \"summary\": \"short explanation\"\n"
-        "}}\n\n"
-        "Research Outputs:\n"
-        "{{outputs}}"
+            "You are a contradiction-detection assistant.\n"
+            "Analyze the following research outputs for logical or factual conflicts.\n"
+            "Identify contradictions such as:\n"
+            "- Opposing claims\n"
+            "- Conflicting statistics\n"
+            "- Incompatible trends or predictions\n\n"
+            "Return STRICT JSON ONLY:\n"
+            "{{\n"
+            "  \"verdict\": \"conflict\" or \"no_conflict\",\n"
+            "  \"conflicting_pairs\": [\"summary 1 vs summary 2\", ...],\n"
+            "  \"summary\": \"short explanation\"\n"
+            "}}\n\n"
+            "Research Outputs:\n"
+            "{outputs}\n"
     ),
 )
 
 
 def contradiction_node(state: ResearchState) -> ResearchState:
-    outputs: List[str] = state.get("research_output", "")
+    outputs: List[str] = state["research_outputs"]
     joined = "\n\n----\n\n".join(outputs)
 
     chain = contradiction_prompt | llm
